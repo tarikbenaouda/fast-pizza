@@ -8,7 +8,7 @@ function MenuItem({ pizza }) {
   return (
     <li className="flex gap-4 py-2">
       <img
-        className={`h-42 ${soldOut ? 'opacity-70 grayscale' : ''}`}
+        className={`h-24 sm:h-32 ${soldOut ? 'opacity-70 grayscale' : ''}`}
         src={imageUrl}
         alt={name}
       />
