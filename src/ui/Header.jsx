@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import SearchOrder from '../featuers/order/SearchOrder';
-import Username from '../featuers/user/Username';
+import SearchOrder from '../features/order/SearchOrder';
+import Username from '../features/user/Username';
 
 function Header() {
   return (
