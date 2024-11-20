@@ -5,12 +5,19 @@ import { act } from 'react';
 function getPosition() {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
+    // resolve({
+    //   coords: {
+    //     latitude: 37.7749,
+    //     longitude: -122.4194,
+    //   },
+    // });
   });
 }
 
 export const fetchAddress = createAsyncThunk(
   'user/fetchAddress',
   async function () {
+    console.log('hello');
     // 1) We get the user's geolocation position
     const positionObj = await getPosition();
     const position = {
@@ -30,6 +37,9 @@ export const fetchAddress = createAsyncThunk(
 const initialState = {
   username: '',
   status: 'idle',
+  error: null,
+  position: { latitude: 0, longitude: 0 },
+  address: '',
 };
 
 const userSlice = createSlice({
@@ -42,15 +52,17 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchAddress.pending, (state) => (state.status = 'loading'))
+      .addCase(fetchAddress.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(fetchAddress.fulfilled, (state, action) => {
         state.position = action.payload.position;
         state.address = action.payload.address;
         state.status = 'idle';
       })
       .addCase(fetchAddress.rejected, (state, action) => {
-        state.status = 'error';
         state.error = action.error.message;
+        state.status = 'error';
       }),
 });
 
