@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 // Test ID: IIDSAT
 
+import { useEffect } from 'react';
 import { useFetcher, useLoaderData } from 'react-router-dom';
 import { getOrder } from '../../services/apiRestaurant';
 import {
@@ -9,7 +10,7 @@ import {
   formatDate,
 } from '../../utils/helpers';
 import OrderItem from './OrderItem';
-import { useEffect } from 'react';
+import UpdateOrder from './UpdateOrder';
 
 // const order = {
 //   id: "ABCDEF",
@@ -120,6 +121,7 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }
